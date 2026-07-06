@@ -1,0 +1,40 @@
+# ==========================================================
+# STAGE 1: Build Java Fat JAR using Maven and Temurin JDK 21
+# ==========================================================
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
+WORKDIR /app
+
+# Copy pom.xml to cache dependencies in Docker layer
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copy application source code
+COPY src ./src
+
+# Package the application as a standalone fat JAR (excluding tests for speed)
+RUN mvn package -DskipTests -B
+
+# ==========================================================
+# STAGE 2: Secure, Lightweight JRE 21 Execution Environment
+# ==========================================================
+FROM eclipse-temurin:21-jre-alpine AS runtime
+WORKDIR /app
+
+# Run as non-privileged spring user for security hardening
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+
+# Copy built JAR from stage 1
+COPY --from=build /app/target/sports-turf-platform-1.0.0-SNAPSHOT.jar app.jar
+
+# Setup default container environment variables
+ENV PORT=8080
+ENV SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/turfbooking
+ENV SPRING_DATASOURCE_USERNAME=postgres
+ENV SPRING_DATASOURCE_PASSWORD=postgres
+ENV JWT_SECRET=9a2b8c7d6e5f4g3h2i1j0k9l8m7n6o5p4q3r2s1t0u9v8w7x6y5z4a3b2c1d0e
+
+# Expose backend REST port
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

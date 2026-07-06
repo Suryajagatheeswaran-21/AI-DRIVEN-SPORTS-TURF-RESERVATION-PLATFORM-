@@ -1,0 +1,39 @@
+[
+  { "id": 101, "district_id": 8, "name": "Erode City" },
+  { "id": 102, "district_id": 8, "name": "Perundurai" },
+  { "id": 103, "district_id": 8, "name": "Gobichettipalayam" },
+  { "id": 104, "district_id": 8, "name": "Sathyamangalam" },
+  { "id": 105, "district_id": 8, "name": "Bhavani" },
+  { "id": 106, "district_id": 8, "name": "Sivagiri" },
+  { "id": 107, "district_id": 8, "name": "Anthiyur" },
+  { "id": 108, "district_id": 8, "name": "Kodumudi" },
+  { "id": 109, "district_id": 8, "name": "Chennimalai" },
+  { "id": 110, "district_id": 8, "name": "Modakurichi" },
+
+  { "id": 201, "district_id": 5, "name": "Salem City" },
+  { "id": 202, "district_id": 5, "name": "Attur" },
+  { "id": 203, "district_id": 5, "name": "Mettur" },
+  { "id": 204, "district_id": 5, "name": "Omalur" },
+  { "id": 205, "district_id": 5, "name": "Sankari" },
+
+  { "id": 301, "district_id": 2, "name": "Coimbatore City" },
+  { "id": 302, "district_id": 2, "name": "Pollachi" },
+  { "id": 303, "district_id": 2, "name": "Mettupalayam" },
+  { "id": 304, "district_id": 2, "name": "Sulur" },
+
+  { "id": 401, "district_id": 17, "name": "Tiruppur City" },
+  { "id": 402, "district_id": 17, "name": "Dharapuram" },
+  { "id": 403, "district_id": 17, "name": "Palladam" },
+  { "id": 404, "district_id": 17, "name": "Kangeyam" },
+
+  { "id": 501, "district_id": 19, "name": "Namakkal Town" },
+  { "id": 502, "district_id": 19, "name": "Rasipuram" },
+  { "id": 503, "district_id": 19, "name": "Tiruchengode" },
+  { "id": 504, "district_id": 19, "name": "Velur" },
+
+  { "id": 601, "district_id": 1, "name": "Nungambakkam" },
+  { "id": 602, "district_id": 1, "name": "Adyar" },
+  { "id": 603, "district_id": 1, "name": "T. Nagar" },
+  { "id": 604, "district_id": 1, "name": "Velachery" },
+  { "id": 605, "district_id": 1, "name": "Anna Nagar" }
+]

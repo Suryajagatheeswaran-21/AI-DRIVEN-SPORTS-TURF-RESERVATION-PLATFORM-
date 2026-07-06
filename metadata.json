@@ -1,0 +1,6 @@
+{
+  "name": "AI-Driven Sports Turf Booking Platform",
+  "description": "An enterprise-grade blueprint and interactive architect dashboard for an AI-Driven Sports Turf Booking Platform powered by Spring Boot 3, Java 21, pgvector, and Google Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

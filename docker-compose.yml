@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # ==========================================================
+  # 1. PostgreSQL + pgvector Database Engine
+  # ==========================================================
+  db:
+    image: pgvector/pgvector:16
+    container_name: arena-postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: turfbooking
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Automatically initialize schema and load pgvector mock seed data on first container boot
+      - ./schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./sample-data.sql:/docker-entrypoint-initdb.d/02_sample-data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d turfbooking"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================================
+  # 2. Spring Boot REST API Backend
+  # ==========================================================
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: arena-spring-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/turfbooking
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - SPRING_JPA_SHOW_SQL=true
+      - JWT_SECRET=9a2b8c7d6e5f4g3h2i1j0k9l8m7n6o5p4q3r2s1t0u9v8w7x6y5z4a3b2c1d0e
+      # Injected from your host environment shell (e.g. export GEMINI_API_KEY="AIza...")
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT:-}
+      - GOOGLE_CLOUD_LOCATION=${GOOGLE_CLOUD_LOCATION:-us-central1}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ==========================================================
+  # 3. React + Vite Nginx Frontend
+  # ==========================================================
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: arena-react-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+    driver: local
