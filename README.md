@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Enterprise Sports Turf Booking Platform: Full-Stack Production Environment
 
 This project is a high-performance, enterprise-grade Sports Turf Booking Platform featuring a modern React frontend and a robust Spring Boot backend. It includes automated scheduling, admin panel analytics, security controls via JSON Web Tokens (JWT), and a **Gemini AI Arena Scheduler Bot** leveraging a PostgreSQL vector database (`pgvector`) for context-aware Retrieval-Augmented Generation (RAG).
@@ -108,3 +109,6 @@ All REST calls are mapped under the `/api/v1/` routing baseline:
 * **Payments & Billing API**:
   * `POST /api/v1/payments` - Submit financial settlement of booking
   * `GET /api/v1/payments/{id}` - Fetch transaction billing log
+=======
+# AI-DRIVEN-SPORTS-TURF-RESERVATION-PLATFORM-
+>>>>>>> 34b94f96b967ff89d83544ba65626d198f3e9946
